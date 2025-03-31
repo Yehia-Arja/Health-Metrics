@@ -23,7 +23,7 @@ class AuthController extends Controller {
             return ApiResponseService::error('Invalid credentials', null, 401);
         }
         $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token')->accessToken;
         return ApiResponseService::success('Login successful', ['user' => $user,'token' => $token]);
     }
 }
