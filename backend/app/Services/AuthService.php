@@ -4,6 +4,8 @@ namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Exception;
+use Illuminate\Support\Facades\Log;
+
 class AuthService
 {
     public static function login($credentials)
@@ -11,8 +13,9 @@ class AuthService
         if (!Auth::attempt($credentials)) {
             throw new Exception('Invalid credentials', 401);
         }
+        
         $user = Auth::user();
-        $http = new Client();
+        $http = new Client(['timeout' => 10, 'debug'   => true]);
 
         try {
 

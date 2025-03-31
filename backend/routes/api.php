@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+})->middleware('auth:api');
 
 Route::group(['prefix' => 'v0.1'], function () {
     Route::group(['prefix' => 'guest'], function () {
