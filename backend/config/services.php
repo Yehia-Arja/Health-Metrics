@@ -17,8 +17,8 @@ return [
 
     'passport' => [
         'login_endpoint' => env('PASSPORT_LOGIN_ENDPOINT'),
-        'client_id'      => env('PASSPORT_PASSWORD_GRANT_CLIENT_ID'),
-        'client_secret'  => env('PASSPORT_PASSWORD_GRANT_CLIENT_SECRET'),
+        'client_id'      => env('PASSPORT_PASSWORD_CLIENT_ID'),
+        'client_secret'  => env('PASSPORT_PASSWORD_CLIENT_SECRET'),
     ],
 
     'postmark' => [
