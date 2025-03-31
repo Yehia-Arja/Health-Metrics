@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginApi, signupApi } from "./authService";
+import authService  from "./authService";
 
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async (userData, { rejectWithValue }) => {
         try {
-            const response = await loginApi(userData);
-            return response.data;
+            const response = await authService.login(userData);
+            return response.data ?? rejectWithValue(response.message);
         }catch (error) {
             return rejectWithValue(error.response.data);
         }
@@ -18,7 +18,7 @@ export const signupUser = createAsyncThunk(
     'auth/signupUser',
     async (userData, { rejectWithValue }) => {
         try {
-            const response = await signupApi(userData);
+            const response = await authService.signup(userData);
             return response.data;
         }catch (error) {
             return rejectWithValue(error.response.data);
