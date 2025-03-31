@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\ApiResponseService;
 use App\Models\User;
