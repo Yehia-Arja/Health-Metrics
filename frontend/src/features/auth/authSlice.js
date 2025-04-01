@@ -3,7 +3,7 @@ import authService  from "./authService";
 
 
 export const loginUser = createAsyncThunk(
-    'auth/loginUser',
+    "auth/loginUser",
     async (userData, { rejectWithValue }) => {
         try {
             const response = await authService.login(userData);
@@ -15,11 +15,11 @@ export const loginUser = createAsyncThunk(
 )
 
 export const signupUser = createAsyncThunk(
-    'auth/signupUser',
+    "auth/signupUser",
     async (userData, { rejectWithValue }) => {
         try {
-            const response = await authService.signup(userData);
-            return response.data;
+            const response = await authService.signup(userData);     
+            return response.data ?? rejectWithValue(response.message);
         }catch (error) {
             return rejectWithValue(error.response.data);
         }
@@ -27,7 +27,7 @@ export const signupUser = createAsyncThunk(
 )
 
 const authSlice = createSlice({
-    name: 'auth',
+    name: "auth",
     initialState: {
         user: null,
         token: null,
@@ -40,6 +40,9 @@ const authSlice = createSlice({
             state.user = null;
             state.token = null;
             state.isAuthenticated = false;
+        },
+        clearError: (state) => {
+            state.error = null;
         },
     },
     extraReducers: (builder) => {
@@ -57,17 +60,15 @@ const authSlice = createSlice({
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                console.log(state.error)
             });
         builder
             .addCase(signupUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(signupUser.fulfilled, (state, action) => {
+            .addCase(signupUser.fulfilled, (state) => {
                 state.loading = false;
-                state.user = action.payload.user;
-                state.token = action.payload.token;
-                state.isAuthenticated = true;
             })
             .addCase(signupUser.rejected, (state, action) => {
                 state.loading = false;
@@ -76,5 +77,5 @@ const authSlice = createSlice({
     },
 })
 
-export const { logout } = authSlice.actions;
+export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
