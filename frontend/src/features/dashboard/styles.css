@@ -1,0 +1,24 @@
+.dashboard-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.dashboard-heading {
+    text-align: center;
+    color: #3535F3;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.toggle-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
