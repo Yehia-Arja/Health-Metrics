@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 
 const Login = () => { 
-    const { form, setForm, handleLogin, error, loading } = useAuthLogic();
-  
+    const { form, setForm, handleSignup, error, loading } = useAuthLogic();
+    
     return (
         <div className="input-container">
             <h1>Login</h1>
+            <label>Username</label>
+            <Input
+                type="text"
+                value={form.username}
+                onChange={(e) => setForm({...form,username: e.target.value})}
+                placeholder="Username"
+            />
             <label>Email</label>
             <Input
                 type="email"
@@ -24,8 +31,8 @@ const Login = () => {
                 onChange={(e) => setForm({...form,password: e.target.value})}
                 placeholder="Password"
             />
-            <p>Don't have an account? <Link to="/signup"className="link">signup now!</Link></p>
-            <Button text={loading ? "Logging in..." : "L O G I N"} onClick={handleLogin}></Button>
+            <p>Already have an account? <Link to="/login"className="link">Login now</Link></p>
+            <Button text = {loading ? "Signing up..." : "Signup"} onClick={handleSignup}></Button>
             {error && <p className="error">{error}</p>}
         </div>
     );

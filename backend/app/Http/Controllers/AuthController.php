@@ -17,7 +17,7 @@ class AuthController extends Controller {
         $user = new User($data);
         $user->save();
 
-        return ApiResponseService::success('User created successfully', $user, 201);
+        return ApiResponseService::success('User created successfully');
     }
 
     public function login(LoginRequest $request){
