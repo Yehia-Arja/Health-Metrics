@@ -47,7 +47,6 @@ class DashboardService{
             'distance' => $weeklyDistance,
         ];
 
-
         return [
             'daily'  => $daily,
             'weekly' => $weekly,
