@@ -53,7 +53,7 @@ const useDashboardLogic = () => {
             const monthData = data.weekly_by_month[monthKey] || [];
             const labels = monthData.map(item => new Date(item.start_date));
             const values = monthData.map(item => {
-            return item.total[type] || 0;
+                return item[`total_${type}`] || 0;
         });
         return {
             labels,
