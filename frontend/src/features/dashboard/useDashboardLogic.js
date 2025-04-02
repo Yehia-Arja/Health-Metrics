@@ -49,14 +49,11 @@ const useDashboardLogic = () => {
         };
         } else {
         
-        const monthKey = `${filterYear}-${filterPeriod.padStart(2, '0')}`;
-        const monthData = data.weekly_by_month[monthKey] || [];
-        const labels = monthData.map(item => new Date(item.start_date));
-        const values = monthData.map(item => {
-            if (type === 'steps') return item.total_steps;
-            if (type === 'active_minutes') return item.total_active_minutes;
-            if (type === 'distance') return item.total_distance;
-            return null;
+            const monthKey = `${filterYear}-${filterPeriod.padStart(2, '0')}`;
+            const monthData = data.weekly_by_month[monthKey] || [];
+            const labels = monthData.map(item => new Date(item.start_date));
+            const values = monthData.map(item => {
+            return item.total[type] || 0;
         });
         return {
             labels,
