@@ -27,5 +27,5 @@ class DashboardController extends Controller {
         $data = array_values(array_diff($columns, ['id', 'user_id', 'date']));
         return ApiResponseService::success('Data returned successfully',$data);
     }
-
+  
 }
