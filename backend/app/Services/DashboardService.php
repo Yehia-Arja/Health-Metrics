@@ -30,7 +30,7 @@ class DashboardService
 
         foreach ($chunks as $chunk) {
             self::upsertDashboardRecords($chunk);
-            usleep(200000); // Sleep for 0.2 seconds between chunks
+            usleep(200000);
         }
 
         self::generateAndCacheDashboardData(1);
@@ -41,13 +41,13 @@ class DashboardService
         $dailyByWeek = [];
         $weeklyByMonth = [];
 
-        // Group daily records by a unique key that includes year and ISO week (e.g., "2020-W01")
+        
         Dashboard::where('user_id', $userId)
             ->orderBy('date')
             ->chunk(500, function ($records) use (&$dailyByWeek) {
                 foreach ($records as $record) {
                     $dt = Carbon::parse($record->date);
-                    $key = $dt->format('Y-\\WW');  // Produces keys like "2020-W01", "2020-W02", etc.
+                    $key = $dt->format('Y-\\WW');
                     $dailyByWeek[$key][] = [
                         'date' => $dt->format('Y-m-d'),
                         'steps' => $record->steps,
@@ -57,7 +57,6 @@ class DashboardService
                 }
             });
 
-        // Build weekly summary using a raw query and group by year-month.
         $weeklyRaw = DB::table('dashboards')
             ->select(
                 DB::raw('YEARWEEK(date, 1) as week_key'),
@@ -75,7 +74,7 @@ class DashboardService
             ->get();
 
         foreach ($weeklyRaw as $week) {
-            // Create a month key including year, e.g. "2020-01"
+            
             $monthKey = Carbon::parse($week->start_date)->format('Y-m');
             $weeklyByMonth[$monthKey][] = [
                 'week' => $week->week_number,
@@ -86,7 +85,7 @@ class DashboardService
             ];
         }
 
-        // Store the computed data in the dashboard_cache table after compressing and base64 encoding
+       
         DB::table('dashboard_cache')->updateOrInsert(
             ['user_id' => $userId],
             [
