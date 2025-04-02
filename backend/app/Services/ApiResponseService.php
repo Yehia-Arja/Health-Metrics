@@ -3,14 +3,14 @@ namespace App\Services;
 class ApiResponseService {
     public static function success($message,$data=null,$code=200) {
         return response()->json([
-            'status' => 'success',
+            'success' => 'true',
             'message' => $message,
             'data' => $data
         ], $code);
     }
     public static function error($message,$data=null,$code=400) {
         return response()->json([
-            'status' => 'error',
+            'success' => 'false',
             'message' => $message,
             'data' => $data
         ], $code);

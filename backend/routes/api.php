@@ -14,6 +14,8 @@ Route::group(['prefix' => 'v0.1'], function () {
         Route::post('/signup', [AuthController::class, 'signup']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/activity', [DashboardController::class, 'getActivity']);
+        Route::post('/upload',[DashboardController::class, 'store']);
     });
        
 });
