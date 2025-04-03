@@ -19,6 +19,8 @@ Route::group(['prefix' => 'v0.1'], function () {
         Route::post('/upload',[DashboardController::class, 'store']);
         Route::get('/predictions/goal', [PredictionController::class, 'goalPrediction']);
         Route::get('/predictions/anomalies', [PredictionController::class, 'anomalyDetection']);
+        Route::get('/predictions/trends', [PredictionController::class, 'futureTrendPrediction']);
+        Route::get('/predictions/insights', [PredictionController::class, 'actionableInsights']);
     });
        
 });
