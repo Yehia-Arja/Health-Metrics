@@ -62,16 +62,16 @@ const Dashboard = () => {
     const handleYearChange = (e) => {
         const val = e.target.value;
         if (/^\d*$/.test(val)) {
-        setYearInput(val);
-        setFilterYear(val);
+            setYearInput(val);
+            setFilterYear(val);
         }
     };
 
     const handlePeriodChange = (e) => {
         const val = e.target.value;
         if (/^\d*$/.test(val)) {
-        setPeriodInput(val);
-        setFilterPeriod(val);
+            setPeriodInput(val);
+            setFilterPeriod(val);
         }
     };
 

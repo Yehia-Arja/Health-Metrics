@@ -8,7 +8,7 @@ use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DashboardRequest;
 use Illuminate\Support\Facades\Schema;
-
+use App\Events\CsvUploaded;
 class DashboardController extends Controller {
     public function index() {
         //$user = Auth::user();
@@ -20,6 +20,7 @@ class DashboardController extends Controller {
         $path = $data['file']->store('uploads');
         DashboardService::processCsvAndStore($path);
 
+        event(new CsvUploaded(1));
         return ApiResponseService::success('Dashboard data created successfully');
     }
     public function getActivity() {
@@ -27,4 +28,5 @@ class DashboardController extends Controller {
         $data = array_values(array_diff($columns, ['id', 'user_id', 'date']));
         return ApiResponseService::success('Data returned successfully',$data);
     }
+  
 }
